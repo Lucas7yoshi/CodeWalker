@@ -32,4 +32,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Build
-        run: msbuild CodeWalker.sln /p:Configuration=Release  /p:Platform=x64
+        run: msbuild CodeWalker.sln /target:CodeWalker /p:Configuration=Release  /p:Platform=x64
