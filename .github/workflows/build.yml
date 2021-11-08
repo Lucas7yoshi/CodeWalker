@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Build Test
 
 # Controls when the workflow will run
 on:
@@ -17,7 +17,12 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-
+    
+    strategy:
+      fail-fast: true
+      matrix:
+        buildConfig: ["Release", "Debug"]       
+  
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -32,4 +37,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Build
-        run: msbuild CodeWalker.sln /target:CodeWalker /p:Configuration=Release  /p:Platform=x64
+        run: msbuild CodeWalker.sln /p:Configuration=${{ matrix.buildConfig }}
