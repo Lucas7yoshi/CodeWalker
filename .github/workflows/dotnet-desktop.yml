@@ -27,7 +27,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Restore
-      run: dotnet restore CodeWalker.sln
+      run: msbuild CodeWalker.sln /t:Restore
 
     - name: Build
-      run: dotnet build CodeWalker.sln --configuration ${{ matrix.configuration }}
+      run: msbuild CodeWalker.sln /p:Configuration=Release /m
