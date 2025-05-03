@@ -46,7 +46,7 @@ jobs:
         xcopy .\icons dist\icons /E /Y
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: CodeWalker_${{ matrix.configuration }}_${{ matrix.platform }}_${{ github.sha }}
         path: dist
