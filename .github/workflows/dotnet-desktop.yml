@@ -38,4 +38,4 @@ jobs:
 
     # Build the solution
     - name: Build solution
-      run: msbuild CodeWalker.sln /p:Configuration=${{ matrix.configuration }} /m
+      run: msbuild CodeWalker.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=x64 /m
