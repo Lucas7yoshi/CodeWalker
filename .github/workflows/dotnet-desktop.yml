@@ -26,8 +26,8 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
-    - name: Restore for net48/win‑x64
-      run: dotnet restore CodeWalker.sln --runtime win‑x64
+    - name: Restore
+      run: dotnet restore CodeWalker.sln
 
-    - name: Build for net48/win‑x64
-      run: dotnet build CodeWalker.sln --configuration ${{ matrix.configuration }} --runtime win‑x64 --no-restore
+    - name: Build
+      run: dotnet build CodeWalker.sln --configuration ${{ matrix.configuration }}
