@@ -28,7 +28,4 @@ jobs:
       run: msbuild CodeWalker.sln /t:Restore
 
     - name: Build
-      run: msbuild CodeWalker.sln ^
-        /p:Configuration=${{ matrix.configuration }} ^
-        /p:Platform=${{ matrix.platform }} ^
-        /m
+      run: msbuild CodeWalker.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /m
