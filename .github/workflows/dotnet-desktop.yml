@@ -50,3 +50,4 @@ jobs:
       with:
         name: CodeWalker_${{ matrix.configuration }}_${{ matrix.platform }}_${{ github.sha }}
         path: dist
+        retention-days: 7
