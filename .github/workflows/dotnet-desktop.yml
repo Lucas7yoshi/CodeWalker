@@ -29,3 +29,24 @@ jobs:
 
     - name: Build
       run: msbuild CodeWalker.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /m
+
+    - name: Package
+      run: |
+        mkdir dist
+        xcopy .\CodeWalker\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        xcopy .\CodeWalker.ErrorReport\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        xcopy .\CodeWalker.Gen9Converter\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        xcopy .\CodeWalker.ModManager\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        xcopy .\CodeWalker.Peds\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        xcopy .\CodeWalker.RPFExplorer\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        xcopy .\CodeWalker.Vehicles\bin\${{ matrix.configuration }}\net48 dist /E /Y
+        mkdir dist\Shaders
+        xcopy .\Shaders dist\Shaders /E /Y
+        mkdir dist\icons
+        xcopy .\icons dist\icons /E /Y
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: CodeWalker_${{ matrix.configuration }}_${{ matrix.platform }}_${{ github.sha }}
+        path: dist
