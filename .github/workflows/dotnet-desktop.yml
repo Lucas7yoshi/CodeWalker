@@ -34,13 +34,8 @@ jobs:
 
     # Restore packages (populates obj with RuntimeIdentifiers)
     - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
+      run: nuget restore CodeWalker.sln
 
     # Build the solution
     - name: Build solution
-      run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /m
-      env:
-        Configuration: ${{ matrix.configuration }}
-
+      run: msbuild CodeWalker.sln /p:Configuration=${{ matrix.configuration }} /m
