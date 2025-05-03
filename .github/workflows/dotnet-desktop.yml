@@ -7,11 +7,10 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-
     strategy:
       matrix:
+        platform: [x86, x64]
         configuration: [Debug, Release]
 
     runs-on: windows-latest
@@ -22,7 +21,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
@@ -30,4 +28,7 @@ jobs:
       run: msbuild CodeWalker.sln /t:Restore
 
     - name: Build
-      run: msbuild CodeWalker.sln /p:Configuration=Release /m
+      run: msbuild CodeWalker.sln ^
+        /p:Configuration=${{ matrix.configuration }} ^
+        /p:Platform=${{ matrix.platform }} ^
+        /m
